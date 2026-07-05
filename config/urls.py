@@ -26,13 +26,46 @@ urlpatterns = [
 
     path("admin/", admin.site.urls),
 
-    path("api/schema/", SpectacularAPIView.as_view()),
+    path("api/users/", include("users.urls")),
+
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
 
     path(
         "api/docs/",
-        SpectacularSwaggerView.as_view(
-            url_name="schema"
-        ),
+        SpectacularSwaggerView.as_view(url_name="schema"),
     ),
 
+    path(
+        "api/workspaces/",
+        include("workspace.urls")
+    ),
+
+    path(
+        "api/documents/",
+        include("documents.urls")
+    ),
+
+    path(
+
+    "api/comments/",
+
+    include("comments.urls")
+
+),
+
+    path(
+
+        "api/tags/",
+
+        include("tags.urls")
+
+    ),
+
+    path(
+
+    "api/audit-logs/",
+
+    include("audit.urls")
+
+),
 ]
