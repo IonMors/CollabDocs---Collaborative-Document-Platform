@@ -401,10 +401,21 @@ The project includes:
 
 ---
 
-# Author
+# 🎥 Video Demonstration
 
-**Ayan Dey, Subhadeep Mondal, Aashish Poojari, Pranish N**
+Click the link below to watch a comprehensive walkthrough of the application features, database setup, and API endpoints:
 
-Backend Engineering Assessment Project
+👉 **[Watch the Demo Video on Google Drive](https://drive.google.com/file/d/1l7pMbcDZ_8-konbkxnLbS0Z52p8hqbUF/view?usp=drive_link)**
 
-Built using Django REST Framework and PostgreSQL.
+---
+
+# 👥 Authors
+
+This Backend Engineering Assessment Project was built collaboratively by:
+
+* 💻 **Ayan Dey**
+* 💻 **Subhadeep Mondal**
+* 💻 **Aashish Poojari**
+* 💻 **Pranish N**
+
+*Built with Django REST Framework and PostgreSQL.*
