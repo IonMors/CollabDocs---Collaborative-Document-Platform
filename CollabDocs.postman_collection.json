@@ -1,0 +1,1163 @@
+{
+  "info": {
+    "_postman_id": "aad33231-f5f0-4a1e-8575-22e070abfd52",
+    "name": "CollabDocs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "6887805",
+    "_collection_link": "https://go.postman.co/collection/6887805-aad33231-f5f0-4a1e-8575-22e070abfd52?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Visualization Script",
+                  "// Visualization Script",
+                  "",
+                  "const template = `",
+                  "<style>",
+                  "  body { font-family: Arial, sans-serif; padding: 16px; }",
+                  "  h2 { color: #333; margin-bottom: 12px; }",
+                  "  .no-tasks { color: #888; font-style: italic; font-size: 14px; }",
+                  "  table { border-collapse: collapse; width: 100%; font-size: 13px; }",
+                  "  th {",
+                  "    background-color: #4a90d9;",
+                  "    color: #fff;",
+                  "    font-weight: bold;",
+                  "    padding: 10px 14px;",
+                  "    text-align: left;",
+                  "    border: 1px solid #3a7bbf;",
+                  "  }",
+                  "  td {",
+                  "    padding: 8px 14px;",
+                  "    border: 1px solid #ddd;",
+                  "    vertical-align: top;",
+                  "  }",
+                  "  tr:nth-child(even) td { background-color: #f2f7fd; }",
+                  "  tr:nth-child(odd) td { background-color: #ffffff; }",
+                  "  tr:hover td { background-color: #ddeeff; }",
+                  "  .status-PENDING   { color: #e67e22; font-weight: bold; }",
+                  "  .status-DONE      { color: #27ae60; font-weight: bold; }",
+                  "  .status-IN_PROGRESS { color: #2980b9; font-weight: bold; }",
+                  "</style>",
+                  "",
+                  "<h2>Tasks ({{count}} total)</h2>",
+                  "",
+                  "{{#if hasTasks}}",
+                  "<table>",
+                  "  <thead>",
+                  "    <tr>",
+                  "      <th>Title</th>",
+                  "      <th>Description</th>",
+                  "      <th>Status</th>",
+                  "      <th>Due At</th>",
+                  "      <th>Owner</th>",
+                  "    </tr>",
+                  "  </thead>",
+                  "  <tbody>",
+                  "    {{#each tasks}}",
+                  "    <tr>",
+                  "      <td>{{title}}</td>",
+                  "      <td>{{description}}</td>",
+                  "      <td><span class=\"status-{{status}}\">{{status}}</span></td>",
+                  "      <td>{{due_at}}</td>",
+                  "      <td>{{owner}}</td>",
+                  "    </tr>",
+                  "    {{/each}}",
+                  "  </tbody>",
+                  "</table>",
+                  "{{else}}",
+                  "<p class=\"no-tasks\">No tasks found.</p>",
+                  "{{/if}}",
+                  "`;",
+                  "",
+                  "function createPayload() {",
+                  "  const res = pm.response.json();",
+                  "  const tasks = res.tasks || [];",
+                  "  return {",
+                  "    count: res.count !== undefined ? res.count : tasks.length,",
+                  "    hasTasks: tasks.length > 0,",
+                  "    tasks: tasks.map(t => ({",
+                  "      title:       t.title       || '',",
+                  "      description: t.description || '',",
+                  "      status:      t.status      || '',",
+                  "      due_at:      t.due_at      || '',",
+                  "      owner:       t.owner !== undefined ? String(t.owner) : ''",
+                  "    }))",
+                  "  };",
+                  "}",
+                  "",
+                  "pm.visualizer.set(template, createPayload());",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"john_doe\",\r\n    \"password\": \"John@12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/users/register/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                "register",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Visualization Script",
+                  "// Visualization Script",
+                  "",
+                  "const template = `",
+                  "<style>",
+                  "  body { font-family: Arial, sans-serif; padding: 16px; }",
+                  "  h2 { color: #333; margin-bottom: 12px; }",
+                  "  .no-tasks { color: #888; font-style: italic; font-size: 14px; }",
+                  "  table { border-collapse: collapse; width: 100%; font-size: 13px; }",
+                  "  th {",
+                  "    background-color: #4a90d9;",
+                  "    color: #fff;",
+                  "    font-weight: bold;",
+                  "    padding: 10px 14px;",
+                  "    text-align: left;",
+                  "    border: 1px solid #3a7bbf;",
+                  "  }",
+                  "  td {",
+                  "    padding: 8px 14px;",
+                  "    border: 1px solid #ddd;",
+                  "    vertical-align: top;",
+                  "  }",
+                  "  tr:nth-child(even) td { background-color: #f2f7fd; }",
+                  "  tr:nth-child(odd) td { background-color: #ffffff; }",
+                  "  tr:hover td { background-color: #ddeeff; }",
+                  "  .status-PENDING   { color: #e67e22; font-weight: bold; }",
+                  "  .status-DONE      { color: #27ae60; font-weight: bold; }",
+                  "  .status-IN_PROGRESS { color: #2980b9; font-weight: bold; }",
+                  "</style>",
+                  "",
+                  "<h2>Tasks ({{count}} total)</h2>",
+                  "",
+                  "{{#if hasTasks}}",
+                  "<table>",
+                  "  <thead>",
+                  "    <tr>",
+                  "      <th>Title</th>",
+                  "      <th>Description</th>",
+                  "      <th>Status</th>",
+                  "      <th>Due At</th>",
+                  "      <th>Owner</th>",
+                  "    </tr>",
+                  "  </thead>",
+                  "  <tbody>",
+                  "    {{#each tasks}}",
+                  "    <tr>",
+                  "      <td>{{title}}</td>",
+                  "      <td>{{description}}</td>",
+                  "      <td><span class=\"status-{{status}}\">{{status}}</span></td>",
+                  "      <td>{{due_at}}</td>",
+                  "      <td>{{owner}}</td>",
+                  "    </tr>",
+                  "    {{/each}}",
+                  "  </tbody>",
+                  "</table>",
+                  "{{else}}",
+                  "<p class=\"no-tasks\">No tasks found.</p>",
+                  "{{/if}}",
+                  "`;",
+                  "",
+                  "function createPayload() {",
+                  "  const res = pm.response.json();",
+                  "  const tasks = res.tasks || [];",
+                  "  return {",
+                  "    count: res.count !== undefined ? res.count : tasks.length,",
+                  "    hasTasks: tasks.length > 0,",
+                  "    tasks: tasks.map(t => ({",
+                  "      title:       t.title       || '',",
+                  "      description: t.description || '',",
+                  "      status:      t.status      || '',",
+                  "      due_at:      t.due_at      || '',",
+                  "      owner:       t.owner !== undefined ? String(t.owner) : ''",
+                  "    }))",
+                  "  };",
+                  "}",
+                  "",
+                  "pm.visualizer.set(template, createPayload());",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"john_doe\",\r\n    \"password\": \"John@12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/users/login/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Current User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Visualization Script",
+                  "// Visualization Script",
+                  "",
+                  "const template = `",
+                  "<style>",
+                  "  body { font-family: Arial, sans-serif; padding: 16px; }",
+                  "  h2 { color: #333; margin-bottom: 12px; }",
+                  "  .no-tasks { color: #888; font-style: italic; font-size: 14px; }",
+                  "  table { border-collapse: collapse; width: 100%; font-size: 13px; }",
+                  "  th {",
+                  "    background-color: #4a90d9;",
+                  "    color: #fff;",
+                  "    font-weight: bold;",
+                  "    padding: 10px 14px;",
+                  "    text-align: left;",
+                  "    border: 1px solid #3a7bbf;",
+                  "  }",
+                  "  td {",
+                  "    padding: 8px 14px;",
+                  "    border: 1px solid #ddd;",
+                  "    vertical-align: top;",
+                  "  }",
+                  "  tr:nth-child(even) td { background-color: #f2f7fd; }",
+                  "  tr:nth-child(odd) td { background-color: #ffffff; }",
+                  "  tr:hover td { background-color: #ddeeff; }",
+                  "  .status-PENDING   { color: #e67e22; font-weight: bold; }",
+                  "  .status-DONE      { color: #27ae60; font-weight: bold; }",
+                  "  .status-IN_PROGRESS { color: #2980b9; font-weight: bold; }",
+                  "</style>",
+                  "",
+                  "<h2>Tasks ({{count}} total)</h2>",
+                  "",
+                  "{{#if hasTasks}}",
+                  "<table>",
+                  "  <thead>",
+                  "    <tr>",
+                  "      <th>Title</th>",
+                  "      <th>Description</th>",
+                  "      <th>Status</th>",
+                  "      <th>Due At</th>",
+                  "      <th>Owner</th>",
+                  "    </tr>",
+                  "  </thead>",
+                  "  <tbody>",
+                  "    {{#each tasks}}",
+                  "    <tr>",
+                  "      <td>{{title}}</td>",
+                  "      <td>{{description}}</td>",
+                  "      <td><span class=\"status-{{status}}\">{{status}}</span></td>",
+                  "      <td>{{due_at}}</td>",
+                  "      <td>{{owner}}</td>",
+                  "    </tr>",
+                  "    {{/each}}",
+                  "  </tbody>",
+                  "</table>",
+                  "{{else}}",
+                  "<p class=\"no-tasks\">No tasks found.</p>",
+                  "{{/if}}",
+                  "`;",
+                  "",
+                  "function createPayload() {",
+                  "  const res = pm.response.json();",
+                  "  const tasks = res.tasks || [];",
+                  "  return {",
+                  "    count: res.count !== undefined ? res.count : tasks.length,",
+                  "    hasTasks: tasks.length > 0,",
+                  "    tasks: tasks.map(t => ({",
+                  "      title:       t.title       || '',",
+                  "      description: t.description || '',",
+                  "      status:      t.status      || '',",
+                  "      due_at:      t.due_at      || '',",
+                  "      owner:       t.owner !== undefined ? String(t.owner) : ''",
+                  "    }))",
+                  "  };",
+                  "}",
+                  "",
+                  "pm.visualizer.set(template, createPayload());",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_11d2}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"event\": 1,\r\n    \"attendee_name\": \"Anmol\",\r\n    \"attendee_email\": \"anmol@example.com\",\r\n    \"seats_reserved\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/users/me/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                "me",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_11d2}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/users/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Workspace",
+      "item": [
+        {
+          "name": "Create Workspace",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_11d2}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"AI Research Team\",\r\n    \"description\": \"Workspace for building AI-powered collaboration tools.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Workspace Members",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/943d6a24-6824-4f8b-afcd-014cd5cf409b/members/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                "943d6a24-6824-4f8b-afcd-014cd5cf409b",
+                "members",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Workspaces",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_11d2}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Workspace Stats",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/workspaces/943d6a24-6824-4f8b-afcd-014cd5cf409b/stats/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "workspaces",
+                "943d6a24-6824-4f8b-afcd-014cd5cf409b",
+                "stats",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "item": [
+        {
+          "name": "Create Tag",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0a5y}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Machine Learning\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tags/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tags",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Tags",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0a5y}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Machine Learning\"\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tags/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tags",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Create Document",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide\",\r\n    \"content\": \"This document explains the deployment workflow for ML models using Django REST Framework and Docker.\",\r\n    \"status\": \"DRAFT\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Documents",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide\",\r\n    \"content\": \"This document explains the deployment workflow for ML models using Django REST Framework and Docker.\",\r\n    \"status\": \"DRAFT\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Documents",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide\",\r\n    \"content\": \"This document explains the deployment workflow for ML models using Django REST Framework and Docker.\",\r\n    \"status\": \"DRAFT\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/?search=Deployment",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Deployment"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Document Versions",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide\",\r\n    \"content\": \"This document explains the deployment workflow for ML models using Django REST Framework and Docker.\",\r\n    \"status\": \"DRAFT\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/ad11d9c8-dfb7-4923-93cf-6fb9d6a3a7ff/versions/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "ad11d9c8-dfb7-4923-93cf-6fb9d6a3a7ff",
+                "versions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a document",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide - Version 2\",\r\n    \"content\": \"This document now includes Kubernetes deployment, Docker Compose, and GitHub Actions CI/CD pipeline integration.\",\r\n    \"status\": \"PUBLISHED\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/ad11d9c8-dfb7-4923-93cf-6fb9d6a3a7ff/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "ad11d9c8-dfb7-4923-93cf-6fb9d6a3a7ff",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Document Summary",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide\",\r\n    \"content\": \"This document explains the deployment workflow for ML models using Django REST Framework and Docker.\",\r\n    \"status\": \"DRAFT\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/documents/summary/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "documents",
+                "summary",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"document\": \"ad11d9c8-dfb7-4923-93cf-6fb9d6a3a7ff\",\r\n    \"content\": \"Excellent documentation. We should add a Kubernetes deployment section.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/comments/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "comments",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reply to Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"Agreed. I'll prepare that section in the next revision.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/comments/148e4cfe-a5fc-4058-ab03-e9b208d92096/reply/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "comments",
+                "148e4cfe-a5fc-4058-ab03-e9b208d92096",
+                "reply",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Audit Logs",
+      "item": [
+        {
+          "name": "List All Audit Logs",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide - Version 2\",\r\n    \"content\": \"This document now includes Kubernetes deployment, Docker Compose, and GitHub Actions CI/CD pipeline integration.\",\r\n    \"status\": \"PUBLISHED\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/audit-logs/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "audit-logs",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve a Single Audit Log",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"workspace\": \"943d6a24-6824-4f8b-afcd-014cd5cf409b\",\r\n    \"title\": \"Model Deployment Guide - Version 2\",\r\n    \"content\": \"This document now includes Kubernetes deployment, Docker Compose, and GitHub Actions CI/CD pipeline integration.\",\r\n    \"status\": \"PUBLISHED\",\r\n    \"tags\": [\r\n        \"983b8859-ab6c-4edc-831f-70acee3859b1\"\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/audit-logs/d682c05e-6d19-44ed-93b3-d67c1dcfd370/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "audit-logs",
+                "d682c05e-6d19-44ed-93b3-d67c1dcfd370",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "auth_secret_11d2",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0qzf",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_0qzf",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_0a5y",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_11d2",
+      "secret": true
+    }
+  ]
+}
